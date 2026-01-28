@@ -110,16 +110,6 @@ export function View({ selectedResult, isAudioPlaying }: ViewProps): React.JSX.E
         const neckBone = vrm.humanoid?.getNormalizedBoneNode("neck");
         const spineBone = vrm.humanoid?.getNormalizedBoneNode("spine");
 
-        // Debug: log bone availability (only once per speaking session)
-        if (lipSyncTimeRef.current < 0.2) {
-          console.log("[Avatar Debug] Body animation - Bones found:", {
-            head: !!headBone,
-            neck: !!neckBone,
-            spine: !!spineBone,
-            humanoid: !!vrm.humanoid,
-          });
-        }
-
         if (headBone) {
           // Gentle nodding motion (increased amplitude for visibility)
           headBone.rotation.x = Math.sin(elapsedTime * 2) * 0.08;
@@ -185,15 +175,6 @@ export function View({ selectedResult, isAudioPlaying }: ViewProps): React.JSX.E
         // Idle breathing animation when not speaking
         const spineBone = vrm.humanoid?.getNormalizedBoneNode("spine");
         const headBone = vrm.humanoid?.getNormalizedBoneNode("head");
-
-        // Debug: log bones availability periodically (every 5 seconds)
-        if (Math.floor(elapsedTime) % 5 === 0 && elapsedTime - Math.floor(elapsedTime) < deltaTime) {
-          console.log("[Avatar Debug] Idle animation - Bones found:", {
-            head: !!headBone,
-            neck: !!vrm.humanoid?.getNormalizedBoneNode("neck"),
-            spine: !!spineBone,
-          });
-        }
 
         if (spineBone) {
           // Gentle breathing motion (increased for visibility)

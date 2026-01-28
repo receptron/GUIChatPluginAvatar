@@ -156,10 +156,6 @@ async function loadVRM(url: string): Promise<void> {
     scene.add(vrm.scene);
     currentVrm = vrm;
 
-    console.log("[Avatar Debug] VRM loaded successfully");
-    console.log("[Avatar Debug] VRM humanoid:", !!vrm.humanoid);
-    console.log("[Avatar Debug] VRM expressionManager:", !!vrm.expressionManager);
-
     isLoading.value = false;
   } catch (error) {
     console.error("Failed to load VRM:", error);
@@ -168,9 +164,6 @@ async function loadVRM(url: string): Promise<void> {
   }
 }
 
-// Debug: track animation frame count
-let animateFrameCount = 0;
-
 function animate(): void {
   animationFrameId = requestAnimationFrame(animate);
 
@@ -178,12 +171,6 @@ function animate(): void {
 
   const deltaTime = clock.getDelta();
   const elapsedTime = clock.getElapsedTime();
-
-  // Debug: log every 300 frames (~5 seconds at 60fps)
-  animateFrameCount++;
-  if (animateFrameCount % 300 === 0) {
-    console.log("[Avatar Debug] animate() running, frame:", animateFrameCount, "currentVrm:", !!currentVrm, "isAudioPlaying:", props.isAudioPlaying);
-  }
 
   if (currentVrm) {
     // Update VRM
@@ -200,16 +187,6 @@ function animate(): void {
       const headBone = currentVrm.humanoid?.getNormalizedBoneNode("head");
       const neckBone = currentVrm.humanoid?.getNormalizedBoneNode("neck");
       const spineBone = currentVrm.humanoid?.getNormalizedBoneNode("spine");
-
-      // Debug: log bone availability (only once per speaking session)
-      if (lipSyncTime < 0.2) {
-        console.log("[Avatar Debug] Body animation - Bones found:", {
-          head: !!headBone,
-          neck: !!neckBone,
-          spine: !!spineBone,
-          humanoid: !!currentVrm.humanoid,
-        });
-      }
 
       if (headBone) {
         // Gentle nodding motion (increased amplitude for visibility)
@@ -276,15 +253,6 @@ function animate(): void {
       // Idle breathing animation when not speaking
       const spineBone = currentVrm.humanoid?.getNormalizedBoneNode("spine");
       const headBone = currentVrm.humanoid?.getNormalizedBoneNode("head");
-
-      // Debug: log bones availability periodically (every 5 seconds)
-      if (Math.floor(elapsedTime) % 5 === 0 && elapsedTime - Math.floor(elapsedTime) < deltaTime) {
-        console.log("[Avatar Debug] Idle animation - Bones found:", {
-          head: !!headBone,
-          neck: !!currentVrm.humanoid?.getNormalizedBoneNode("neck"),
-          spine: !!spineBone,
-        });
-      }
 
       if (spineBone) {
         // Gentle breathing motion (increased for visibility)
@@ -461,7 +429,6 @@ watch(
 
       // Load VRM only if URL changed (avoid reload on emotion/action update)
       if (avatarData.avatarUrl && avatarData.avatarUrl !== currentLoadedUrl) {
-        console.log("[Avatar Debug] VRM URL changed:", avatarData.avatarUrl);
         currentLoadedUrl = avatarData.avatarUrl;
         loadVRM(avatarData.avatarUrl);
       }
@@ -487,23 +454,13 @@ watch(
   { deep: true },
 );
 
-// Debug: watch isAudioPlaying prop changes
-watch(
-  () => props.isAudioPlaying,
-  (newValue) => {
-    console.log("[Avatar Debug] Plugin received isAudioPlaying:", newValue);
-  },
-);
-
 onMounted(() => {
-  console.log("[Avatar Debug] View component MOUNTED");
   initScene();
 
   // Initial VRM load
   if (props.selectedResult?.toolName === TOOL_NAME && props.selectedResult.data) {
     const avatarData = props.selectedResult.data as AvatarData;
     if (avatarData.avatarUrl) {
-      console.log("[Avatar Debug] Initial VRM load:", avatarData.avatarUrl);
       currentLoadedUrl = avatarData.avatarUrl;
       loadVRM(avatarData.avatarUrl);
     }
