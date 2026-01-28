@@ -1512,8 +1512,10 @@ graceful-fs@^4.2.4:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.11.tgz#4183e4e8bf08bb6e05bbb2f7d2e0c8f712ca40e3"
   integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
 
-"gui-chat-protocol@file:../gui-chat-protocol":
-  version "0.0.3"
+gui-chat-protocol@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/gui-chat-protocol/-/gui-chat-protocol-0.0.4.tgz#dd8c0c4a979f06f87cfc406760491834f1d4ce69"
+  integrity sha512-TsmO0vRnKUl0zWXbZlj1u35JRz0sum2JtzsKrTKtT+yJt0mHBVRX+o8McIihACTnlXVssjJ9bxYiH+k17S5BhQ==
 
 has-flag@^4.0.0:
   version "4.0.0"

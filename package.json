@@ -1,6 +1,6 @@
 {
   "name": "@gui-chat-plugin/avatar",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "3D Avatar Plugin for GUIChat - VRM avatar with lip-sync",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -92,7 +92,7 @@
   "license": "MIT",
   "dependencies": {
     "@pixiv/three-vrm": "^3.3.3",
-    "gui-chat-protocol": "file:../gui-chat-protocol",
+    "gui-chat-protocol": "^0.0.4",
     "three": "^0.174.0"
   }
 }
