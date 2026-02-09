@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/%40gui-chat-plugin%2Favatar.svg)](https://badge.fury.io/js/%40gui-chat-plugin%2Favatar)
 # @gui-chat-plugin/avatar
 
 [![npm version](https://badge.fury.io/js/@gui-chat-plugin%2Favatar.svg)](https://www.npmjs.com/package/@gui-chat-plugin/avatar)
