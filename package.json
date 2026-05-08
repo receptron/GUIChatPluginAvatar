@@ -1,6 +1,6 @@
 {
   "name": "@gui-chat-plugin/avatar",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "description": "3D Avatar Plugin for GUIChat - VRM avatar with lip-sync",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -57,26 +57,26 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@tailwindcss/vite": "^4.2.2",
+    "@tailwindcss/vite": "^4.2.4",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/three": "^0.174.0",
-    "@typescript-eslint/eslint-plugin": "^8.58.0",
-    "@typescript-eslint/parser": "^8.58.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
     "@vitejs/plugin-react": "^4.5.0",
     "@vitejs/plugin-vue": "^6.0.5",
-    "eslint": "^10.1.0",
-    "eslint-plugin-vue": "^10.8.0",
-    "globals": "^17.4.0",
+    "eslint": "^10.3.0",
+    "eslint-plugin-vue": "^10.9.1",
+    "globals": "^17.6.0",
     "openai": "^6.16.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwindcss": "^4.2.2",
-    "typescript": "~6.0.2",
-    "vite": "^8.0.3",
-    "vue": "^3.5.31",
+    "tailwindcss": "^4.2.4",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.11",
+    "vue": "^3.5.34",
     "vue-eslint-parser": "^10.4.0",
-    "vue-tsc": "^3.2.6"
+    "vue-tsc": "^3.2.8"
   },
   "keywords": [
     "guichat",
@@ -93,7 +93,7 @@
   "license": "MIT",
   "dependencies": {
     "@pixiv/three-vrm": "^3.3.3",
-    "gui-chat-protocol": "^0.1.0",
+    "gui-chat-protocol": "^0.3.3",
     "three": "^0.174.0"
   }
 }
