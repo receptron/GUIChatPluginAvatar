@@ -16,8 +16,11 @@ A 3D avatar plugin for [MulmoChat](https://github.com/receptron/MulmoChat) - dis
 ## Installation
 
 ```bash
-yarn add @gui-chat-plugin/avatar
+yarn add @gui-chat-plugin/avatar gui-chat-protocol
 ```
+
+> `gui-chat-protocol` is a peer dependency — install it alongside the plugin; the host application provides the runtime and this plugin only declares the compatible range.
+
 
 ## Usage
 
