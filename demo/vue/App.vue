@@ -178,10 +178,8 @@
 import { ref, computed, nextTick, watch } from "vue";
 import { plugin } from "../../src/vue";
 import { useChat } from "./useChat";
-import type { ToolPlugin, ToolSample, ToolResult } from "gui-chat-protocol/vue";
-
-// Plugin configuration
-const currentPlugin = plugin as unknown as ToolPlugin;
+import type { ToolSample, ToolResult } from "gui-chat-protocol/vue";
+import { isAvatarArgs } from "../shared/isAvatarArgs";
 
 // Chat composable
 const {
@@ -196,7 +194,8 @@ const {
   toggleMockMode,
   executePlugin,
 } = useChat({
-  plugin: currentPlugin,
+  plugin,
+  isArgs: isAvatarArgs,
 });
 
 // Local state
@@ -207,10 +206,10 @@ const messagesContainer = ref<HTMLElement | null>(null);
 const isAudioPlaying = ref(false);
 
 // Computed properties from plugin
-const pluginName = computed(() => currentPlugin.toolDefinition.name);
-const samples = computed(() => currentPlugin.samples || []);
-const ViewComponent = computed(() => currentPlugin.viewComponent);
-const PreviewComponent = computed(() => currentPlugin.previewComponent);
+const pluginName = computed(() => plugin.toolDefinition.name);
+const samples = computed(() => plugin.samples || []);
+const ViewComponent = computed(() => plugin.viewComponent);
+const PreviewComponent = computed(() => plugin.previewComponent);
 
 // Scroll to bottom when new messages arrive
 watch(
@@ -266,7 +265,7 @@ const executeSample = async (sample: ToolSample) => {
     toolCalls: [
       {
         id: toolCallId,
-        name: currentPlugin.toolDefinition.name,
+        name: plugin.toolDefinition.name,
         arguments: JSON.stringify(sample.args),
       },
     ],

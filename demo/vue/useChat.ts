@@ -2,7 +2,7 @@
  * useChat - Vue composable for plugin demo chat
  */
 import { ref, computed } from "vue";
-import type { ToolPlugin, ToolResult, ToolContext } from "gui-chat-protocol/vue";
+import type { ToolPlugin, ToolResult } from "gui-chat-protocol/vue";
 import {
   type ChatMessage,
   loadApiKey,
@@ -17,14 +17,15 @@ import {
 
 export type { ChatMessage } from "../shared";
 
-export interface UseChatOptions {
-  plugin: ToolPlugin;
+export interface UseChatOptions<T, J, A extends object> {
+  plugin: ToolPlugin<T, J, A>;
+  isArgs: (args: unknown) => args is A;
   model?: string;
   systemPrompt?: string;
 }
 
-export function useChat(options: UseChatOptions) {
-  const { plugin, model = "gpt-4o-mini" } = options;
+export function useChat<T, J, A extends object>(options: UseChatOptions<T, J, A>) {
+  const { plugin, isArgs, model = "gpt-4o-mini" } = options;
 
   // Load initial API key
   const initialKey = loadApiKey();
@@ -45,8 +46,7 @@ export function useChat(options: UseChatOptions) {
    * Execute plugin with given arguments
    */
   const executePlugin = async (args: unknown): Promise<ToolResult> => {
-    const execute = plugin.execute as (context: ToolContext, args: unknown) => Promise<ToolResult>;
-    return await executePluginWithContext(execute, args, result.value);
+    return await executePluginWithContext(plugin.execute, isArgs, args, result.value);
   };
 
   /**
