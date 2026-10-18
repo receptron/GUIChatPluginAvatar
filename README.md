@@ -2,6 +2,7 @@
 # @gui-chat-plugin/avatar
 
 [![npm version](https://badge.fury.io/js/@gui-chat-plugin%2Favatar.svg)](https://www.npmjs.com/package/@gui-chat-plugin/avatar)
+[![scoria](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/receptron/GUIChatPluginAvatar/badges/scoria.json)](https://github.com/receptron/GUIChatPluginAvatar/actions/workflows/scoria.yml)
 
 A 3D avatar plugin for [MulmoChat](https://github.com/receptron/MulmoChat) - displays a VRM avatar that lip-syncs during voice conversations.
 
