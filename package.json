@@ -1,6 +1,6 @@
 {
   "name": "@gui-chat-plugin/avatar",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "3D Avatar Plugin for GUIChat - VRM avatar with lip-sync",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -46,7 +46,7 @@
     "format:check": "prettier --check \"{src,demo}/**/*.{ts,tsx,vue,json,css}\" \"*.{ts,js,json}\""
   },
   "peerDependencies": {
-    "gui-chat-protocol": "^2.1.0",
+    "gui-chat-protocol": "^2.3.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "vue": "^3.5.0"
