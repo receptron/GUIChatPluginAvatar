@@ -25,8 +25,7 @@ export const TOOL_DEFINITION: ToolDefinition = {
     properties: {
       avatarUrl: {
         type: "string",
-        description:
-          "URL to a VRM avatar file. If not provided, a default avatar will be used. Only needed on first call.",
+        description: "URL to a VRM avatar file. If not provided, a default avatar will be used. Only needed on first call.",
       },
       emotion: {
         type: "string",

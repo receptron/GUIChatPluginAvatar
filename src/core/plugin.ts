@@ -11,17 +11,13 @@ import { TOOL_NAME, TOOL_DEFINITION } from "./definition";
 import { SAMPLES } from "./samples";
 
 // Default VRM avatar URL (VRoid Hub sample)
-const DEFAULT_AVATAR_URL =
-  "https://pixiv.github.io/three-vrm/packages/three-vrm/examples/models/VRM1_Constraint_Twist_Sample.vrm";
+const DEFAULT_AVATAR_URL = "https://pixiv.github.io/three-vrm/packages/three-vrm/examples/models/VRM1_Constraint_Twist_Sample.vrm";
 
 // ============================================================================
 // Execute Function
 // ============================================================================
 
-export const executeAvatar = async (
-  _context: ToolContext,
-  args: AvatarArgs,
-): Promise<ToolResult<AvatarData, never>> => {
+export const executeAvatar = async (_context: ToolContext, args: AvatarArgs): Promise<ToolResult<AvatarData, never>> => {
   const { avatarUrl, emotion = "neutral", action = "none" } = args;
 
   const avatarData: AvatarData = {
@@ -35,9 +31,7 @@ export const executeAvatar = async (
   const changes: string[] = [];
   if (emotion !== "neutral") changes.push(`emotion: ${emotion}`);
   if (action !== "none") changes.push(`action: ${action}`);
-  const message = changes.length > 0
-    ? `Avatar updated (${changes.join(", ")})`
-    : "Avatar displayed";
+  const message = changes.length > 0 ? `Avatar updated (${changes.join(", ")})` : "Avatar displayed";
 
   return {
     toolName: TOOL_NAME,
@@ -45,8 +39,7 @@ export const executeAvatar = async (
     data: avatarData,
     updating: true, // Update existing avatar instead of creating new
     instructions:
-      "The avatar is reacting. Continue the conversation naturally. " +
-      "You can call this tool again anytime to change emotion or trigger gestures.",
+      "The avatar is reacting. Continue the conversation naturally. " + "You can call this tool again anytime to change emotion or trigger gestures.",
   };
 };
 

@@ -340,11 +340,7 @@ export function View({ selectedResult, isAudioPlaying }: ViewProps): React.JSX.E
       )}
 
       {/* Audio Playing Indicator (for debugging) */}
-      {isAudioPlaying && (
-        <div className="absolute top-4 right-4 px-3 py-1 bg-green-600 text-white text-sm rounded-full">
-          Speaking...
-        </div>
-      )}
+      {isAudioPlaying && <div className="absolute top-4 right-4 px-3 py-1 bg-green-600 text-white text-sm rounded-full">Speaking...</div>}
     </div>
   );
 }
