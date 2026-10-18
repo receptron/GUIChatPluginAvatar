@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { plugin, View, Preview } from "../../src/react";
 import { useChat } from "./useChat";
-import type { ToolResult, ToolSample, ToolPluginReact } from "gui-chat-protocol/react";
+import type { ToolResult, ToolSample } from "gui-chat-protocol/react";
+import { isAvatarArgs } from "../shared/isAvatarArgs";
 
 function App() {
-  const currentPlugin = plugin as unknown as ToolPluginReact;
-
   // Chat hook
   const {
     messages,
@@ -21,7 +20,8 @@ function App() {
     toggleMockMode,
     executePlugin,
   } = useChat({
-    plugin: currentPlugin,
+    plugin,
+    isArgs: isAvatarArgs,
   });
 
   // Local state
@@ -29,8 +29,8 @@ function App() {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   // Plugin info
-  const pluginName = currentPlugin.toolDefinition.name;
-  const samples = currentPlugin.samples || [];
+  const pluginName = plugin.toolDefinition.name;
+  const samples = plugin.samples || [];
 
   // Scroll to bottom when new messages arrive
   useEffect(() => {
@@ -86,25 +86,25 @@ function App() {
       ...prev,
       // 1. Assistant message with tool_calls
       {
-        role: "assistant" as const,
+        role: "assistant",
         content: "",
         toolCalls: [
           {
             id: toolCallId,
-            name: currentPlugin.toolDefinition.name,
+            name: plugin.toolDefinition.name,
             arguments: JSON.stringify(sample.args),
           },
         ],
       },
       // 2. Tool response message (required by OpenAI)
       {
-        role: "tool" as const,
+        role: "tool",
         content: JSON.stringify(toolResult.jsonData || toolResult.message),
         toolCallId,
       },
       // 3. Final assistant message
       {
-        role: "assistant" as const,
+        role: "assistant",
         content: `Executed sample: ${sample.name}`,
       },
     ]);

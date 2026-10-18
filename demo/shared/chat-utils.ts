@@ -99,21 +99,21 @@ export const convertToApiMessages = (
 ): OpenAI.Chat.ChatCompletionMessageParam[] => {
   return [
     { role: "system", content: systemPrompt },
-    ...messages.map((m) => {
+    ...messages.map((m): OpenAI.Chat.ChatCompletionMessageParam => {
       if (m.role === "tool") {
         return {
-          role: "tool" as const,
+          role: "tool",
           content: m.content,
           tool_call_id: m.toolCallId!,
         };
       }
       if (m.role === "assistant" && m.toolCalls) {
         return {
-          role: "assistant" as const,
+          role: "assistant",
           content: m.content || null,
           tool_calls: m.toolCalls.map((tc) => ({
             id: tc.id,
-            type: "function" as const,
+            type: "function",
             function: {
               name: tc.name,
               arguments: tc.arguments,
@@ -122,7 +122,7 @@ export const convertToApiMessages = (
         };
       }
       return {
-        role: m.role as "user" | "assistant",
+        role: m.role,
         content: m.content,
       };
     }),
@@ -150,11 +150,15 @@ export const buildToolsParam = (
 /**
  * Execute plugin and return result
  */
-export const executePluginWithContext = async (
-  execute: (context: ToolContext, args: unknown) => Promise<ToolResult>,
+export const executePluginWithContext = async <A, R>(
+  execute: (context: ToolContext, args: A) => Promise<R>,
+  isArgs: (args: unknown) => args is A,
   args: unknown,
   currentResult: ToolResult | null
-): Promise<ToolResult> => {
+): Promise<R> => {
+  if (!isArgs(args)) {
+    throw new Error(`Invalid tool arguments: ${JSON.stringify(args)}`);
+  }
   const context: ToolContext = {
     currentResult,
   };
