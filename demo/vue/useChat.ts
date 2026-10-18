@@ -158,9 +158,7 @@ export function useChat<T, J, A extends object>(options: UseChatOptions<T, J, A>
 
         // Call API again to get LLM's response to tool results
         // Include instructions in the system prompt if available
-        const instructionPrompt = lastInstructions
-          ? `${systemPrompt}\n\n[Instructions for next response]: ${lastInstructions}`
-          : systemPrompt;
+        const instructionPrompt = lastInstructions ? `${systemPrompt}\n\n[Instructions for next response]: ${lastInstructions}` : systemPrompt;
 
         apiMessages = convertToApiMessages(messages.value, instructionPrompt);
         response = await callOpenAI(client, model, apiMessages, tools);

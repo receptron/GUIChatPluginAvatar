@@ -18,17 +18,12 @@ const AVATAR_ACTIONS: Record<AvatarAction, true> = {
   bow: true,
 };
 
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null && !Array.isArray(value);
+const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === "object" && value !== null && !Array.isArray(value);
 
 const isOptionalKeyOf = (value: unknown, keys: Record<string, true>): boolean =>
   value === undefined || (typeof value === "string" && Object.keys(keys).includes(value));
 
-const isOptionalString = (value: unknown): boolean =>
-  value === undefined || typeof value === "string";
+const isOptionalString = (value: unknown): boolean => value === undefined || typeof value === "string";
 
 export const isAvatarArgs = (args: unknown): args is AvatarArgs =>
-  isRecord(args) &&
-  isOptionalString(args["avatarUrl"]) &&
-  isOptionalKeyOf(args["emotion"], AVATAR_EMOTIONS) &&
-  isOptionalKeyOf(args["action"], AVATAR_ACTIONS);
+  isRecord(args) && isOptionalString(args["avatarUrl"]) && isOptionalKeyOf(args["emotion"], AVATAR_EMOTIONS) && isOptionalKeyOf(args["action"], AVATAR_ACTIONS);

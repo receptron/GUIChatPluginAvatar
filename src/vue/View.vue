@@ -4,28 +4,17 @@
     <div ref="containerRef" class="size-full" />
 
     <!-- Loading Indicator -->
-    <div
-      v-if="isLoading"
-      class="absolute inset-0 flex items-center justify-center bg-slate-900/80"
-    >
+    <div v-if="isLoading" class="absolute inset-0 flex items-center justify-center bg-slate-900/80">
       <div class="text-white text-lg">Loading Avatar...</div>
     </div>
 
     <!-- Error Message -->
-    <div
-      v-if="errorMessage"
-      class="absolute inset-0 flex items-center justify-center bg-slate-900/80"
-    >
+    <div v-if="errorMessage" class="absolute inset-0 flex items-center justify-center bg-slate-900/80">
       <div class="text-red-400 text-lg text-center p-4">{{ errorMessage }}</div>
     </div>
 
     <!-- Audio Playing Indicator (for debugging) -->
-    <div
-      v-if="isAudioPlaying"
-      class="absolute top-4 right-4 px-3 py-1 bg-green-600 text-white text-sm rounded-full"
-    >
-      Speaking...
-    </div>
+    <div v-if="isAudioPlaying" class="absolute top-4 right-4 px-3 py-1 bg-green-600 text-white text-sm rounded-full">Speaking...</div>
   </div>
 </template>
 
@@ -338,7 +327,7 @@ function animate(): void {
         const spineBone = currentVrm.humanoid?.getNormalizedBoneNode("spine");
 
         // Ease in-out function
-        const ease = (t: number) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
         const eased = ease(progress < 0.5 ? progress * 2 : (1 - progress) * 2);
 
         switch (currentAction) {

@@ -49,7 +49,7 @@ export function useChat<T, J, A extends object>(options: UseChatOptions<T, J, A>
     async (args: unknown): Promise<ToolResult> => {
       return await executePluginWithContext(plugin.execute, isArgs, args, result);
     },
-    [plugin, isArgs, result]
+    [plugin, isArgs, result],
   );
 
   /**
@@ -100,7 +100,7 @@ export function useChat<T, J, A extends object>(options: UseChatOptions<T, J, A>
 
       return newMessages;
     },
-    [executePlugin]
+    [executePlugin],
   );
 
   /**
@@ -180,9 +180,7 @@ export function useChat<T, J, A extends object>(options: UseChatOptions<T, J, A>
 
           // Call API again to get LLM's response to tool results
           // Include instructions in the system prompt if available
-          const instructionPrompt = lastInstructions
-            ? `${systemPrompt}\n\n[Instructions for next response]: ${lastInstructions}`
-            : systemPrompt;
+          const instructionPrompt = lastInstructions ? `${systemPrompt}\n\n[Instructions for next response]: ${lastInstructions}` : systemPrompt;
 
           apiMessages = convertToApiMessages(currentMessages, instructionPrompt);
           response = await callOpenAI(client, model, apiMessages, tools);
@@ -208,7 +206,7 @@ export function useChat<T, J, A extends object>(options: UseChatOptions<T, J, A>
         setIsLoading(false);
       }
     },
-    [messages, useMockMode, hasApiKey, handleMockResponse, apiKey, options.systemPrompt, plugin.systemPrompt, toolDefinition, model, executePlugin]
+    [messages, useMockMode, hasApiKey, handleMockResponse, apiKey, options.systemPrompt, plugin.systemPrompt, toolDefinition, model, executePlugin],
   );
 
   /**
