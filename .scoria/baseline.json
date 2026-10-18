@@ -1,7 +1,7 @@
 {
   "report": {
     "schemaVersion": 1,
-    "root": "/private/tmp/claude-501/-Users-isamu-ss-llm-lab/05aa564a-1040-4f30-b316-122f241bad1d/scratchpad/repos/avatar",
+    "root": ".",
     "label": "@gui-chat-plugin/avatar",
     "profile": "library",
     "stacks": [
@@ -542,11 +542,11 @@
                 "value": 0
               },
               {
-                "file": "src/vue/Preview.vue",
+                "file": "src/react/Preview.tsx",
                 "value": 0
               },
               {
-                "file": "src/vue/View.vue",
+                "file": "src/react/View.tsx",
                 "value": 0
               }
             ]
@@ -575,11 +575,11 @@
                 "value": 0
               },
               {
-                "file": "src/vue/Preview.vue",
+                "file": "src/react/Preview.tsx",
                 "value": 0
               },
               {
-                "file": "src/vue/View.vue",
+                "file": "src/react/View.tsx",
                 "value": 0
               }
             ]
@@ -704,16 +704,6 @@
         "tier": 0
       },
       {
-        "rule": "oxlint/consistent-function-scoping",
-        "severity": "warning",
-        "file": "src/vue/View.vue",
-        "line": 1,
-        "message": "Function `ease` does not capture any variables from its parent scope",
-        "probe": "oxlint",
-        "dimension": "correctness",
-        "tier": 0
-      },
-      {
         "rule": "oxlint/no-await-in-loop",
         "severity": "warning",
         "file": "demo/vue/useChat.ts",
@@ -759,6 +749,16 @@
         "file": "demo/react/useChat.ts",
         "line": 1,
         "message": "Unexpected `await` inside a loop.",
+        "probe": "oxlint",
+        "dimension": "correctness",
+        "tier": 0
+      },
+      {
+        "rule": "oxlint/consistent-function-scoping",
+        "severity": "warning",
+        "file": "src/vue/View.vue",
+        "line": 1,
+        "message": "Function `ease` does not capture any variables from its parent scope",
         "probe": "oxlint",
         "dimension": "correctness",
         "tier": 0
@@ -983,5 +983,5 @@
       "comparable": false
     }
   },
-  "createdAt": "2026-10-18T03:04:22.341Z"
+  "createdAt": "2026-10-18T03:42:57.012Z"
 }
