@@ -147,6 +147,15 @@ export const buildToolsParam = (
   ];
 };
 
+/** A rejected value can be anything; describing it must not throw in place of the rejection. */
+const describeArgs = (value: unknown): string => {
+  try {
+    return JSON.stringify(value) ?? String(value);
+  } catch {
+    return typeof value;
+  }
+};
+
 /**
  * Execute plugin and return result
  */
@@ -157,7 +166,7 @@ export const executePluginWithContext = async <A, R>(
   currentResult: ToolResult | null
 ): Promise<R> => {
   if (!isArgs(args)) {
-    throw new Error(`Invalid tool arguments: ${JSON.stringify(args)}`);
+    throw new Error(`Invalid tool arguments: ${describeArgs(args)}`);
   }
   const context: ToolContext = {
     currentResult,
